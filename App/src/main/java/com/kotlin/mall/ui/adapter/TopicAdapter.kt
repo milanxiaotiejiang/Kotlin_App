@@ -1,10 +1,10 @@
 package com.kotlin.mall.ui.adapter
 
 import android.content.Context
-import android.support.v4.view.PagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.viewpager.widget.PagerAdapter
 import com.kotlin.base.ext.loadUrl
 import com.kotlin.mall.R
 import kotlinx.android.synthetic.main.layout_topic_item.view.*

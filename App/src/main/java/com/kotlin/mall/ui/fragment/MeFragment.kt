@@ -8,6 +8,8 @@ import com.kotlin.base.ext.loadUrl
 import com.kotlin.base.ext.onClick
 import com.kotlin.base.ui.fragment.BaseFragment
 import com.kotlin.base.utils.AppPrefsUtils
+import com.kotlin.base.utils.ext.pop
+import com.kotlin.base.utils.ext.toast
 import com.kotlin.mall.R
 import com.kotlin.mall.ui.activity.SettingActivity
 import com.kotlin.order.common.OrderConstant
@@ -19,8 +21,6 @@ import com.kotlin.provider.common.afterLogin
 import com.kotlin.provider.common.isLogined
 import com.kotlin.user.ui.activity.UserInfoActivity
 import kotlinx.android.synthetic.main.fragment_me.*
-import org.jetbrains.anko.support.v4.startActivity
-import org.jetbrains.anko.support.v4.toast
 
 /*
     "我的"界面
@@ -85,35 +85,35 @@ class MeFragment : BaseFragment(), View.OnClickListener {
         when (view.id) {
             R.id.mUserIconIv, R.id.mUserNameTv -> {
                 afterLogin {
-                    startActivity<UserInfoActivity>()
+                    pop<UserInfoActivity>()
                 }
             }
 
             R.id.mWaitPayOrderTv -> {
-                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_WAIT_PAY)
+                pop<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_WAIT_PAY)
             }
             R.id.mWaitConfirmOrderTv -> {
-                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_WAIT_CONFIRM)
+                pop<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_WAIT_CONFIRM)
             }
             R.id.mCompleteOrderTv -> {
-                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_COMPLETED)
+                pop<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_COMPLETED)
             }
             R.id.mAllOrderTv -> {
                 afterLogin {
-                    startActivity<OrderActivity>()
+                    pop<OrderActivity>()
                 }
             }
 
             R.id.mAddressTv -> {
                 afterLogin {
-                    startActivity<ShipAddressActivity>()
+                    pop<ShipAddressActivity>()
                 }
             }
             R.id.mShareTv -> {
                 toast(R.string.coming_soon_tip)
             }
             R.id.mSettingTv -> {
-                startActivity<SettingActivity>()
+                pop<SettingActivity>()
             }
         }
     }

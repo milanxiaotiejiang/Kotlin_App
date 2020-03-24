@@ -1,10 +1,10 @@
 package com.kotlin.order.ui.fragment
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.launcher.ARouter
 import com.bigkoo.alertview.AlertView
 import com.bigkoo.alertview.OnItemClickListener
@@ -12,6 +12,8 @@ import com.kennyc.view.MultiStateView
 import com.kotlin.base.ext.startLoading
 import com.kotlin.base.ui.adapter.BaseRecyclerViewAdapter
 import com.kotlin.base.ui.fragment.BaseMvpFragment
+import com.kotlin.base.utils.ext.pop
+import com.kotlin.base.utils.ext.toast
 import com.kotlin.order.R
 import com.kotlin.order.common.OrderConstant
 import com.kotlin.order.data.protocol.Order
@@ -24,15 +26,13 @@ import com.kotlin.order.ui.adapter.OrderAdapter
 import com.kotlin.provider.common.ProviderConstant
 import com.kotlin.provider.router.RouterPath
 import kotlinx.android.synthetic.main.fragment_order.*
-import org.jetbrains.anko.support.v4.startActivity
-import org.jetbrains.anko.support.v4.toast
 
 /*
     订单列表Fragment
  */
-class OrderFragment:BaseMvpFragment<OrderListPresenter>(),OrderListView {
+class OrderFragment : BaseMvpFragment<OrderListPresenter>(), OrderListView {
 
-    private lateinit var mAdapter:OrderAdapter
+    private lateinit var mAdapter: OrderAdapter
 
     /*
         Dagger注册
@@ -44,7 +44,7 @@ class OrderFragment:BaseMvpFragment<OrderListPresenter>(),OrderListView {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        return inflater.inflate(R.layout.fragment_order,container,false)
+        return inflater.inflate(R.layout.fragment_order, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -68,17 +68,17 @@ class OrderFragment:BaseMvpFragment<OrderListPresenter>(),OrderListView {
         /*
             订单对应操作
          */
-        mAdapter.listener = object :OrderAdapter.OnOptClickListener {
+        mAdapter.listener = object : OrderAdapter.OnOptClickListener {
             override fun onOptClick(optType: Int, order: Order) {
-                when(optType){
+                when (optType) {
                     OrderConstant.OPT_ORDER_PAY -> {
                         ARouter.getInstance().build(RouterPath.PaySDK.PATH_PAY)
-                                .withInt(ProviderConstant.KEY_ORDER_ID,order.id)
-                                .withLong(ProviderConstant.KEY_ORDER_PRICE,order.totalPrice)
+                                .withInt(ProviderConstant.KEY_ORDER_ID, order.id)
+                                .withLong(ProviderConstant.KEY_ORDER_PRICE, order.totalPrice)
                                 .navigation()
                     }
                     OrderConstant.OPT_ORDER_CONFIRM -> {
-                       mPresenter.confirmOrder(order.id)
+                        mPresenter.confirmOrder(order.id)
                     }
                     OrderConstant.OPT_ORDER_CANCEL -> {
                         //mPresenter.cancelOrder(order.id)
@@ -93,7 +93,7 @@ class OrderFragment:BaseMvpFragment<OrderListPresenter>(),OrderListView {
          */
         mAdapter.setOnItemClickListener(object : BaseRecyclerViewAdapter.OnItemClickListener<Order> {
             override fun onItemClick(item: Order, position: Int) {
-                startActivity<OrderDetailActivity>(ProviderConstant.KEY_ORDER_ID to item.id)
+                pop<OrderDetailActivity>(ProviderConstant.KEY_ORDER_ID to item.id)
             }
         })
 
@@ -103,9 +103,10 @@ class OrderFragment:BaseMvpFragment<OrderListPresenter>(),OrderListView {
     /*
         取消订单对话框
      */
-    private fun showCancelDialog(order:Order) {
-        AlertView("取消订单", "确定取消该订单？", "取消", null, arrayOf("确定"), activity, AlertView.Style.Alert, OnItemClickListener { o, position ->
-            if (position == 0){
+    private fun showCancelDialog(order: Order) {
+        AlertView("取消订单", "确定取消该订单？", "取消", null, arrayOf("确定"),
+                activity, AlertView.Style.Alert, OnItemClickListener { _: Any, position ->
+            if (position == 0) {
                 mPresenter.cancelOrder(order.id)
             }
         }
@@ -118,14 +119,14 @@ class OrderFragment:BaseMvpFragment<OrderListPresenter>(),OrderListView {
      */
     private fun loadData() {
         mMultiStateView.startLoading()
-        mPresenter.getOrderList(arguments!!.getInt(OrderConstant.KEY_ORDER_STATUS,-1))
+        mPresenter.getOrderList(arguments!!.getInt(OrderConstant.KEY_ORDER_STATUS, -1))
     }
 
     /*
         获取订单列表回调
      */
     override fun onGetOrderListResult(result: MutableList<Order>?) {
-        if (result != null && result.size > 0){
+        if (result != null && result.size > 0) {
             mAdapter.setData(result)
             mMultiStateView.viewState = MultiStateView.VIEW_STATE_CONTENT
         }

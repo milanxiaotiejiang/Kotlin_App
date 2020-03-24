@@ -1,21 +1,19 @@
 package com.kotlin.goods.ui.activity
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
 import android.view.View
-import android.widget.*
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.kotlin.base.ext.onClick
 import com.kotlin.base.ext.setVisible
 import com.kotlin.base.ui.activity.BaseActivity
 import com.kotlin.base.ui.adapter.BaseRecyclerViewAdapter
 import com.kotlin.base.utils.AppPrefsUtils
+import com.kotlin.base.utils.ext.pop
+import com.kotlin.base.utils.ext.toast
 import com.kotlin.goods.R
-
 import com.kotlin.goods.common.GoodsConstant
 import com.kotlin.goods.ui.adapter.SearchHistoryAdapter
 import kotlinx.android.synthetic.main.activity_search_goods.*
-import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
 
 /*
     关键字搜索商品页
@@ -97,7 +95,7 @@ class SearchGoodsActivity : BaseActivity(), View.OnClickListener {
      */
     private fun enterGoodsList(value: String) {
         //输入不为空，进入商品列表
-        startActivity<GoodsActivity>(
+        pop<GoodsActivity>(
                 GoodsConstant.KEY_SEARCH_GOODS_TYPE to GoodsConstant.SEARCH_GOODS_TYPE_KEYWORD,
                 GoodsConstant.KEY_GOODS_KEYWORD to value
         )

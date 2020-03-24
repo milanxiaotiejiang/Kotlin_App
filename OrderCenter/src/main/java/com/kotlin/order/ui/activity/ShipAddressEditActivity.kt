@@ -2,25 +2,23 @@ package com.kotlin.order.ui.activity
 
 import android.os.Bundle
 import com.kotlin.base.ext.onClick
-import com.kotlin.base.ui.activity.BaseActivity
 import com.kotlin.base.ui.activity.BaseMvpActivity
+import com.kotlin.base.utils.ext.toast
 import com.kotlin.order.R
 import com.kotlin.order.common.OrderConstant
 import com.kotlin.order.data.protocol.ShipAddress
 import com.kotlin.order.injection.component.DaggerShipAddressComponent
-import com.kotlin.order.injection.module.OrderModule
 import com.kotlin.order.injection.module.ShipAddressModule
 import com.kotlin.order.presenter.EditShipAddressPresenter
 import com.kotlin.order.presenter.view.EditShipAddressView
 import kotlinx.android.synthetic.main.activity_edit_address.*
-import org.jetbrains.anko.toast
 
 /*
     收货人编辑页面
  */
-class ShipAddressEditActivity : BaseMvpActivity<EditShipAddressPresenter>(),EditShipAddressView {
+class ShipAddressEditActivity : BaseMvpActivity<EditShipAddressPresenter>(), EditShipAddressView {
 
-    private var mAddress:ShipAddress? = null
+    private var mAddress: ShipAddress? = null
 
     /*
         Dagger注册
@@ -44,15 +42,15 @@ class ShipAddressEditActivity : BaseMvpActivity<EditShipAddressPresenter>(),Edit
     private fun initView() {
 
         mSaveBtn.onClick {
-            if (mShipNameEt.text.isNullOrEmpty()){
+            if (mShipNameEt.text.isNullOrEmpty()) {
                 toast("名称不能为空")
                 return@onClick
             }
-            if (mShipMobileEt.text.isNullOrEmpty()){
+            if (mShipMobileEt.text.isNullOrEmpty()) {
                 toast("电话不能为空")
                 return@onClick
             }
-            if (mShipAddressEt.text.isNullOrEmpty()){
+            if (mShipAddressEt.text.isNullOrEmpty()) {
                 toast("地址不能为空")
                 return@onClick
             }
@@ -60,7 +58,7 @@ class ShipAddressEditActivity : BaseMvpActivity<EditShipAddressPresenter>(),Edit
                 mPresenter.addShipAddress(mShipNameEt.text.toString(),
                         mShipMobileEt.text.toString(),
                         mShipAddressEt.text.toString())
-            }else{
+            } else {
                 mAddress!!.shipUserName = mShipNameEt.text.toString()
                 mAddress!!.shipUserMobile = mShipMobileEt.text.toString()
                 mAddress!!.shipAddress = mShipAddressEt.text.toString()

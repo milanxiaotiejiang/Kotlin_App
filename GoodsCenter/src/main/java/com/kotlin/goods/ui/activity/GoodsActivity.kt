@@ -1,13 +1,14 @@
 package com.kotlin.goods.ui.activity
 
 import android.os.Bundle
-import android.support.v7.widget.GridLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout
 import com.kennyc.view.MultiStateView
 import com.kotlin.base.ext.startLoading
 import com.kotlin.base.ui.activity.BaseMvpActivity
 import com.kotlin.base.ui.adapter.BaseRecyclerViewAdapter
+import com.kotlin.base.utils.ext.pop
 import com.kotlin.goods.R
 import com.kotlin.goods.common.GoodsConstant
 import com.kotlin.goods.data.protocol.Goods
@@ -17,7 +18,6 @@ import com.kotlin.goods.presenter.GoodsListPresenter
 import com.kotlin.goods.presenter.view.GoodsListView
 import com.kotlin.goods.ui.adapter.GoodsAdapter
 import kotlinx.android.synthetic.main.activity_goods.*
-import org.jetbrains.anko.startActivity
 
 /*
     商品列表Activity
@@ -47,7 +47,7 @@ class GoodsActivity : BaseMvpActivity<GoodsListPresenter>(), GoodsListView, BGAR
 
         mGoodsAdapter.setOnItemClickListener(object : BaseRecyclerViewAdapter.OnItemClickListener<Goods> {
             override fun onItemClick(item: Goods, position: Int) {
-                startActivity<GoodsDetailActivity>(GoodsConstant.KEY_GOODS_ID to item.id)
+                pop<GoodsDetailActivity>(GoodsConstant.KEY_GOODS_ID to item.id)
             }
         })
 
@@ -70,7 +70,7 @@ class GoodsActivity : BaseMvpActivity<GoodsListPresenter>(), GoodsListView, BGAR
     private fun loadData() {
         if (intent.getIntExtra(GoodsConstant.KEY_SEARCH_GOODS_TYPE, 0) != 0) {
             mMultiStateView.startLoading()
-            mPresenter.getGoodsListByKeyword(intent.getStringExtra(GoodsConstant.KEY_GOODS_KEYWORD), mCurrentPage)
+            mPresenter.getGoodsListByKeyword(intent.getStringExtra(GoodsConstant.KEY_GOODS_KEYWORD)!!, mCurrentPage)
         } else {
             mMultiStateView.startLoading()
             mPresenter.getGoodsList(intent.getIntExtra(GoodsConstant.KEY_CATEGORY_ID, 1), mCurrentPage)

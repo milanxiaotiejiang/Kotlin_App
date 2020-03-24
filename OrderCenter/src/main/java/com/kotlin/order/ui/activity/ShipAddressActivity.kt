@@ -1,7 +1,7 @@
 package com.kotlin.order.ui.activity
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bigkoo.alertview.AlertView
 import com.bigkoo.alertview.OnItemClickListener
 import com.eightbitlab.rxbus.Bus
@@ -10,6 +10,8 @@ import com.kotlin.base.ext.onClick
 import com.kotlin.base.ext.startLoading
 import com.kotlin.base.ui.activity.BaseMvpActivity
 import com.kotlin.base.ui.adapter.BaseRecyclerViewAdapter
+import com.kotlin.base.utils.ext.pop
+import com.kotlin.base.utils.ext.toast
 import com.kotlin.order.R
 import com.kotlin.order.common.OrderConstant
 import com.kotlin.order.data.protocol.ShipAddress
@@ -20,15 +22,13 @@ import com.kotlin.order.presenter.ShipAddressPresenter
 import com.kotlin.order.presenter.view.ShipAddressView
 import com.kotlin.order.ui.adapter.ShipAddressAdapter
 import kotlinx.android.synthetic.main.activity_address.*
-import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
 
 /*
     收货人信息列表页
  */
-class ShipAddressActivity:BaseMvpActivity<ShipAddressPresenter>(),ShipAddressView {
+class ShipAddressActivity : BaseMvpActivity<ShipAddressPresenter>(), ShipAddressView {
 
-    private lateinit var mAdapter:ShipAddressAdapter
+    private lateinit var mAdapter: ShipAddressAdapter
 
     /*
         Dagger注册
@@ -59,21 +59,22 @@ class ShipAddressActivity:BaseMvpActivity<ShipAddressPresenter>(),ShipAddressVie
         mAddressRv.adapter = mAdapter
 
         //设置操作事件
-        mAdapter.mOptClickListener = object : ShipAddressAdapter.OnOptClickListener{
+        mAdapter.mOptClickListener = object : ShipAddressAdapter.OnOptClickListener {
             override fun onSetDefault(address: ShipAddress) {
                 mPresenter.setDefaultShipAddress(address)
             }
 
             override fun onEdit(address: ShipAddress) {
-               startActivity<ShipAddressEditActivity>(OrderConstant.KEY_SHIP_ADDRESS to address)
+                pop<ShipAddressEditActivity>(OrderConstant.KEY_SHIP_ADDRESS to address)
 
             }
 
             override fun onDelete(address: ShipAddress) {
-                AlertView("删除", "确定删除该地址？", "取消", null, arrayOf("确定"), this@ShipAddressActivity, AlertView.Style.Alert, OnItemClickListener { o, position ->
-                  if (position == 0){
-                      mPresenter.deleteShipAddress(address.id)
-                  }
+                AlertView("删除", "确定删除该地址？", "取消", null, arrayOf("确定"),
+                        this@ShipAddressActivity, AlertView.Style.Alert, OnItemClickListener { _, position ->
+                    if (position == 0) {
+                        mPresenter.deleteShipAddress(address.id)
+                    }
                 }
 
                 ).show()
@@ -81,7 +82,7 @@ class ShipAddressActivity:BaseMvpActivity<ShipAddressPresenter>(),ShipAddressVie
         }
 
         //单项点击事件
-        mAdapter.setOnItemClickListener(object : BaseRecyclerViewAdapter.OnItemClickListener<ShipAddress>{
+        mAdapter.setOnItemClickListener(object : BaseRecyclerViewAdapter.OnItemClickListener<ShipAddress> {
             override fun onItemClick(item: ShipAddress, position: Int) {
                 Bus.send(SelectAddressEvent(item))
                 finish()
@@ -90,7 +91,7 @@ class ShipAddressActivity:BaseMvpActivity<ShipAddressPresenter>(),ShipAddressVie
 
 
         mAddAddressBtn.onClick {
-            startActivity<ShipAddressEditActivity>()
+            pop<ShipAddressEditActivity>()
         }
     }
 

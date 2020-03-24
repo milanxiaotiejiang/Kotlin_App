@@ -1,10 +1,10 @@
 package com.kotlin.goods.ui.fragment
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.launcher.ARouter
 import com.eightbitlab.rxbus.Bus
 import com.eightbitlab.rxbus.registerInBus
@@ -15,6 +15,7 @@ import com.kotlin.base.ext.startLoading
 import com.kotlin.base.ui.fragment.BaseMvpFragment
 import com.kotlin.base.utils.AppPrefsUtils
 import com.kotlin.base.utils.YuanFenConverter
+import com.kotlin.base.utils.ext.toast
 import com.kotlin.goods.R
 import com.kotlin.goods.common.GoodsConstant
 import com.kotlin.goods.data.protocol.CartGoods
@@ -29,7 +30,6 @@ import com.kotlin.goods.ui.adapter.CartGoodsAdapter
 import com.kotlin.provider.common.ProviderConstant
 import com.kotlin.provider.router.RouterPath
 import kotlinx.android.synthetic.main.fragment_cart.*
-import org.jetbrains.anko.support.v4.toast
 
 /*
     购物车 Fragment
@@ -96,7 +96,7 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
                     .mapTo(cartIdList) { it.id }
             if (cartIdList.size == 0) {
                 toast("请选择需要删除的数据")
-            }else {
+            } else {
                 mPresenter.deleteCartList(cartIdList)
             }
         }
@@ -105,11 +105,11 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
         mSettleAccountsBtn.onClick {
             val cartGoodsList: MutableList<CartGoods> = arrayListOf()
             mAdapter.dataList.filter { it.isSelected }
-                    .mapTo(cartGoodsList){it}
+                    .mapTo(cartGoodsList) { it }
             if (cartGoodsList.size == 0) {
                 toast("请选择需要提交的数据")
-            }else {
-                mPresenter.submitCart(cartGoodsList,mTotalPrice)
+            } else {
+                mPresenter.submitCart(cartGoodsList, mTotalPrice)
             }
         }
     }
@@ -157,9 +157,9 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
         mMultiStateView.viewState = MultiStateView.VIEW_STATE_EMPTY
     }
 
-    private fun handleEvent(size: Int){
+    private fun handleEvent(size: Int) {
         //本地存储并发送事件刷新UI
-        AppPrefsUtils.putInt(GoodsConstant.SP_CART_SIZE,size)
+        AppPrefsUtils.putInt(GoodsConstant.SP_CART_SIZE, size)
         Bus.send(UpdateCartSizeEvent())
         //更新总价
         updateTotalPrice()
@@ -218,14 +218,14 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
      */
     override fun onSubmitCartListResult(result: Int) {
         ARouter.getInstance().build(RouterPath.OrderCenter.PATH_ORDER_CONFIRM)
-                .withInt(ProviderConstant.KEY_ORDER_ID,result)
+                .withInt(ProviderConstant.KEY_ORDER_ID, result)
                 .navigation()
     }
 
     /*
         设置Back是否可见
      */
-    fun setBackVisible(isVisible:Boolean){
+    fun setBackVisible(isVisible: Boolean) {
         mHeaderBar.getLeftView().setVisible(isVisible)
     }
 }

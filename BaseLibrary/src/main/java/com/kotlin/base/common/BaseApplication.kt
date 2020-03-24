@@ -1,7 +1,7 @@
 package com.kotlin.base.common
 
 import android.content.Context
-import android.support.multidex.MultiDexApplication
+import androidx.multidex.MultiDexApplication
 import com.alibaba.android.arouter.launcher.ARouter
 import com.kotlin.base.injection.component.AppComponent
 import com.kotlin.base.injection.component.DaggerAppComponent

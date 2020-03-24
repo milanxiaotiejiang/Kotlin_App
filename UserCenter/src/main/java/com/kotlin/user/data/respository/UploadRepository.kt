@@ -17,5 +17,4 @@ class UploadRepository @Inject constructor(){
         return RetrofitFactory.instance.create(UploadApi::class.java).getUploadToken()
     }
 
-
 }

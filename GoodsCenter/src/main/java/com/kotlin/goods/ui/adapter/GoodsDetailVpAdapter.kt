@@ -1,23 +1,23 @@
 package com.kotlin.goods.ui.adapter
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import com.kotlin.goods.ui.fragment.GoodsDetailTabOneFragment
 import com.kotlin.goods.ui.fragment.GoodsDetailTabTwoFragment
 
 /*
     商品详情ViewPager Adapter
  */
-class GoodsDetailVpAdapter(fm:FragmentManager)
-    :FragmentPagerAdapter(fm) {
+class GoodsDetailVpAdapter(fm: FragmentManager)
+    : FragmentPagerAdapter(fm) {
 
-    private val titles = arrayOf("商品","详情")
+    private val titles = arrayOf("商品", "详情")
 
     override fun getItem(position: Int): Fragment {
-        return if (position == 0){
+        return if (position == 0) {
             GoodsDetailTabOneFragment()
-        }else{
+        } else {
             GoodsDetailTabTwoFragment()
         }
     }

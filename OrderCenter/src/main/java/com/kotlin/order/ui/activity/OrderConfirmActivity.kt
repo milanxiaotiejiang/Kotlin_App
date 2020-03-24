@@ -1,7 +1,7 @@
 package com.kotlin.order.ui.activity
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
@@ -11,6 +11,8 @@ import com.kotlin.base.ext.onClick
 import com.kotlin.base.ext.setVisible
 import com.kotlin.base.ui.activity.BaseMvpActivity
 import com.kotlin.base.utils.YuanFenConverter
+import com.kotlin.base.utils.ext.pop
+import com.kotlin.base.utils.ext.toast
 import com.kotlin.order.R
 import com.kotlin.order.data.protocol.Order
 import com.kotlin.order.event.SelectAddressEvent
@@ -22,20 +24,18 @@ import com.kotlin.order.ui.adapter.OrderGoodsAdapter
 import com.kotlin.provider.common.ProviderConstant
 import com.kotlin.provider.router.RouterPath
 import kotlinx.android.synthetic.main.activity_order_confirm.*
-import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
 
 /*
     订单确认页
  */
 @Route(path = RouterPath.OrderCenter.PATH_ORDER_CONFIRM)
-class OrderConfirmActivity:BaseMvpActivity<OrderConfirmPresenter>(),OrderConfirmView {
+class OrderConfirmActivity : BaseMvpActivity<OrderConfirmPresenter>(), OrderConfirmView {
     @Autowired(name = ProviderConstant.KEY_ORDER_ID)
     @JvmField
-    var mOrderId:Int = 0
+    var mOrderId: Int = 0
 
-    private lateinit var mAdapter:OrderGoodsAdapter
-    private var mCurrentOrder:Order? = null
+    private lateinit var mAdapter: OrderGoodsAdapter
+    private var mCurrentOrder: Order? = null
 
     /*
         Dagger注册
@@ -59,10 +59,10 @@ class OrderConfirmActivity:BaseMvpActivity<OrderConfirmPresenter>(),OrderConfirm
      */
     private fun initView() {
         mShipView.onClick {
-            startActivity<ShipAddressActivity>()
+            pop<ShipAddressActivity>()
         }
         mSelectShipTv.onClick {
-            startActivity<ShipAddressActivity>()
+            pop<ShipAddressActivity>()
         }
 
         mSubmitOrderBtn.onClick {
@@ -82,8 +82,7 @@ class OrderConfirmActivity:BaseMvpActivity<OrderConfirmPresenter>(),OrderConfirm
      */
     private fun initObserve() {
         Bus.observe<SelectAddressEvent>()
-                .subscribe{
-                    t: SelectAddressEvent ->
+                .subscribe { t: SelectAddressEvent ->
                     run {
                         mCurrentOrder?.let {
                             it.shipAddress = t.address
@@ -126,14 +125,14 @@ class OrderConfirmActivity:BaseMvpActivity<OrderConfirmPresenter>(),OrderConfirm
      */
     private fun updateAddressView() {
         mCurrentOrder?.let {
-            if (it.shipAddress == null){
+            if (it.shipAddress == null) {
                 mSelectShipTv.setVisible(true)
                 mShipView.setVisible(false)
-            }else{
+            } else {
                 mSelectShipTv.setVisible(false)
                 mShipView.setVisible(true)
 
-                mShipNameTv.text = it.shipAddress!!.shipUserName + "  "+
+                mShipNameTv.text = it.shipAddress!!.shipUserName + "  " +
                         it.shipAddress!!.shipUserMobile
                 mShipAddressTv.text = it.shipAddress!!.shipAddress
             }
@@ -146,8 +145,8 @@ class OrderConfirmActivity:BaseMvpActivity<OrderConfirmPresenter>(),OrderConfirm
     override fun onSubmitOrderResult(result: Boolean) {
         toast("订单提交成功")
         ARouter.getInstance().build(RouterPath.PaySDK.PATH_PAY)
-                .withInt(ProviderConstant.KEY_ORDER_ID,mCurrentOrder!!.id)
-                .withLong(ProviderConstant.KEY_ORDER_PRICE,mCurrentOrder!!.totalPrice)
+                .withInt(ProviderConstant.KEY_ORDER_ID, mCurrentOrder!!.id)
+                .withLong(ProviderConstant.KEY_ORDER_PRICE, mCurrentOrder!!.totalPrice)
                 .navigation()
         finish()
     }

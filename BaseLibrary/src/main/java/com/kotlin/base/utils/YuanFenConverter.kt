@@ -22,12 +22,12 @@ object YuanFenConverter {
         return result
     }
 
-    /*
-        分 转换为 元
-     */
-    fun changeF2Y(amount: Int?, defaultString: String): String {
-        return changeF2Y(amount as Long, defaultString)
-    }
+//    /*
+//        分 转换为 元
+//     */
+//    fun changeF2Y(amount: Int?, defaultString: String): String {
+//        return changeF2Y(amount as Long, defaultString)
+//    }
 
     /*
         分 转换为 元
@@ -92,7 +92,7 @@ object YuanFenConverter {
         if (!amount.matches(CURRENCY_FEN_REGEX.toRegex())) {
             throw Exception("Invalid format")
         }
-        return BigDecimal.valueOf(java.lang.Long.valueOf(amount)!!).divide(BigDecimal(100)).toString()
+        return BigDecimal.valueOf(java.lang.Long.valueOf(amount)).divide(BigDecimal(100)).toString()
     }
 
     /*
@@ -109,7 +109,7 @@ object YuanFenConverter {
         val currency = amount.replace("\\$|\\¥|\\,".toRegex(), "")
         val index = currency.indexOf(".")
         val length = currency.length
-        var amLong: Long? = 0L
+        val amLong: Long?
         if (index == -1) {
             amLong = java.lang.Long.valueOf(currency + "00")
         } else if (length - index >= 3) {
@@ -119,7 +119,7 @@ object YuanFenConverter {
         } else {
             amLong = java.lang.Long.valueOf(currency.substring(0, index + 1).replace(".", "") + "00")
         }
-        return amLong!!.toString()
+        return amLong.toString()
     }
 
     /*

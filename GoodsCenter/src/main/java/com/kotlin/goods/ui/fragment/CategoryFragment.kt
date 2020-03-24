@@ -1,16 +1,17 @@
 package com.kotlin.goods.ui.fragment
 
 import android.os.Bundle
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.kennyc.view.MultiStateView
 import com.kotlin.base.ext.setVisible
 import com.kotlin.base.ext.startLoading
 import com.kotlin.base.ui.adapter.BaseRecyclerViewAdapter
 import com.kotlin.base.ui.fragment.BaseMvpFragment
+import com.kotlin.base.utils.ext.pop
 import com.kotlin.goods.R
 import com.kotlin.goods.common.GoodsConstant
 import com.kotlin.goods.data.protocol.Category
@@ -22,7 +23,6 @@ import com.kotlin.goods.ui.activity.GoodsActivity
 import com.kotlin.goods.ui.adapter.SecondCategoryAdapter
 import com.kotlin.goods.ui.adapter.TopCategoryAdapter
 import kotlinx.android.synthetic.main.fragment_category.*
-import org.jetbrains.anko.support.v4.startActivity
 
 /*
     商品分类 Fragment
@@ -79,7 +79,7 @@ class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryView {
         mSecondCategoryRv.adapter = secondAdapter
         secondAdapter.setOnItemClickListener(object : BaseRecyclerViewAdapter.OnItemClickListener<Category> {
             override fun onItemClick(item: Category, position: Int) {
-                startActivity<GoodsActivity>(GoodsConstant.KEY_CATEGORY_ID  to item.id)
+                pop<GoodsActivity>(GoodsConstant.KEY_CATEGORY_ID to item.id)
             }
         })
 

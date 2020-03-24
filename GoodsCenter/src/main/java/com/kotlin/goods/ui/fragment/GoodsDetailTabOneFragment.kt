@@ -30,8 +30,6 @@ import com.kotlin.goods.widget.GoodsSkuPopView
 import com.youth.banner.BannerConfig
 import com.youth.banner.Transformer
 import kotlinx.android.synthetic.main.fragment_goods_detail_tab_one.*
-import org.jetbrains.anko.support.v4.act
-import org.jetbrains.anko.support.v4.toast
 
 /*
     商品详情Tab One
@@ -43,7 +41,7 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
     //SKU弹层退场动画
     private lateinit var mAnimationEnd: Animation
 
-    private var mCurGoods:Goods? = null
+    private var mCurGoods: Goods? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
@@ -98,8 +96,8 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
         初始化sku弹层
      */
     private fun initSkuPop() {
-        mSkuPop = GoodsSkuPopView(act)
-        mSkuPop.setOnDismissListener{
+        mSkuPop = GoodsSkuPopView(activity!!)
+        mSkuPop.setOnDismissListener {
             (activity as BaseActivity).contentView.startAnimation(mAnimationEnd)
         }
     }
@@ -108,7 +106,7 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
         加载数据
      */
     private fun loadData() {
-        mPresenter.getGoodsDetailList(act.intent.getIntExtra(GoodsConstant.KEY_GOODS_ID, -1))
+        mPresenter.getGoodsDetailList(activity!!.intent.getIntExtra(GoodsConstant.KEY_GOODS_ID, -1))
     }
 
     /*
@@ -153,10 +151,10 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
     /*
         监听SKU变化及加入购物车事件
      */
-    private fun initObserve(){
+    private fun initObserve() {
         Bus.observe<SkuChangedEvent>()
                 .subscribe {
-                    mSkuSelectedTv.text = mSkuPop.getSelectSku() +GoodsConstant.SKU_SEPARATOR + mSkuPop.getSelectCount()+"件"
+                    mSkuSelectedTv.text = mSkuPop.getSelectSku() + GoodsConstant.SKU_SEPARATOR + mSkuPop.getSelectCount() + "件"
                 }.registerInBus(this)
 
         Bus.observe<AddCartEvent>()
@@ -176,7 +174,7 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
     /*
         加入购物车
      */
-    private fun addCart(){
+    private fun addCart() {
         mCurGoods?.let {
             mPresenter.addCart(it.id,
                     it.goodsDesc,
@@ -184,7 +182,7 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
                     it.goodsDefaultPrice,
                     mSkuPop.getSelectCount(),
                     mSkuPop.getSelectSku()
-                    )
+            )
         }
 
     }

@@ -1,12 +1,12 @@
 package com.kotlin.goods.ui.adapter
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import androidx.recyclerview.widget.RecyclerView
 import com.eightbitlab.rxbus.Bus
 import com.kotlin.base.ext.loadUrl
 import com.kotlin.base.ext.onClick

@@ -7,7 +7,9 @@ import android.widget.FrameLayout
 import android.widget.ViewFlipper
 import com.kotlin.message.R
 import android.widget.TextView
-import org.jetbrains.anko.*
+import com.kotlin.base.utils.ext.dimen
+import com.kotlin.base.utils.ext.find
+import com.kotlin.base.utils.ext.px2sp
 
 /*
     公告组件封装

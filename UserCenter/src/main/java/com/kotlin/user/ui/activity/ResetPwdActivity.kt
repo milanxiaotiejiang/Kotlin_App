@@ -1,22 +1,24 @@
 package com.kotlin.user.ui.activity
 
 import android.os.Bundle
-import android.view.View
 import com.kotlin.base.ext.enable
 import com.kotlin.base.ext.onClick
 import com.kotlin.base.ui.activity.BaseMvpActivity
+import com.kotlin.base.utils.ext.clearTop
+import com.kotlin.base.utils.ext.intentFor
+import com.kotlin.base.utils.ext.singleTop
+import com.kotlin.base.utils.ext.toast
 import com.kotlin.user.R
 import com.kotlin.user.injection.component.DaggerUserComponent
 import com.kotlin.user.injection.module.UserModule
 import com.kotlin.user.presenter.ResetPwdPresenter
 import com.kotlin.user.presenter.view.ResetPwdView
 import kotlinx.android.synthetic.main.activity_reset_pwd.*
-import org.jetbrains.anko.*
 
 /*
     重置密码界面
  */
-class ResetPwdActivity : BaseMvpActivity<ResetPwdPresenter>(), ResetPwdView{
+class ResetPwdActivity : BaseMvpActivity<ResetPwdPresenter>(), ResetPwdView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,15 +33,15 @@ class ResetPwdActivity : BaseMvpActivity<ResetPwdPresenter>(), ResetPwdView{
      */
     private fun initView() {
 
-        mConfirmBtn.enable(mPwdEt,{isBtnEnable()})
-        mConfirmBtn.enable(mPwdConfirmEt,{isBtnEnable()})
+        mConfirmBtn.enable(mPwdEt, { isBtnEnable() })
+        mConfirmBtn.enable(mPwdConfirmEt, { isBtnEnable() })
 
         mConfirmBtn.onClick {
-            if (mPwdEt.text.toString() != mPwdConfirmEt.text.toString()){
+            if (mPwdEt.text.toString() != mPwdConfirmEt.text.toString()) {
                 toast("密码不一致")
                 return@onClick
             }
-            mPresenter.resetPwd(intent.getStringExtra("mobile"),mPwdEt.text.toString())
+            mPresenter.resetPwd(intent.getStringExtra("mobile")!!, mPwdEt.text.toString())
         }
     }
 
@@ -54,7 +56,7 @@ class ResetPwdActivity : BaseMvpActivity<ResetPwdPresenter>(), ResetPwdView{
     /*
         判断按钮是否可用
      */
-    private fun isBtnEnable():Boolean{
+    private fun isBtnEnable(): Boolean {
         return mPwdEt.text.isNullOrEmpty().not() &&
                 mPwdConfirmEt.text.isNullOrEmpty().not()
     }

@@ -6,7 +6,7 @@ import android.graphics.drawable.AnimationDrawable
 import android.view.Gravity
 import android.widget.ImageView
 import com.kotlin.base.R
-import org.jetbrains.anko.find
+import com.kotlin.base.utils.ext.find
 
 /*
     加载对话框封装
@@ -27,12 +27,12 @@ class ProgressLoading private constructor(context: Context, theme: Int) : Dialog
             mDialog.setContentView(R.layout.progress_dialog)
             mDialog.setCancelable(true)
             mDialog.setCanceledOnTouchOutside(false)
-            mDialog.window.attributes.gravity = Gravity.CENTER
+            mDialog.window!!.attributes.gravity = Gravity.CENTER
 
-            val lp = mDialog.window.attributes
+            val lp = mDialog.window!!.attributes
             lp.dimAmount = 0.2f
             //设置属性
-            mDialog.window.attributes = lp
+            mDialog.window!!.attributes = lp
 
             //获取动画视图
             val loadingView = mDialog.find<ImageView>(R.id.iv_loading)

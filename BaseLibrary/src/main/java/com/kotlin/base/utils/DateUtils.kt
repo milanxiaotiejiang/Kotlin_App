@@ -2,9 +2,7 @@ package com.kotlin.base.utils
 
 import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Date
-import java.util.TimeZone
+import java.util.*
 
 /**
  * 日期工具类 默认使用 "yyyy-MM-dd HH:mm:ss" 格式化日期
@@ -216,7 +214,7 @@ object DateUtils {
     fun stringToDate(strTime: String, formatType: String): Date {
         val formatter = SimpleDateFormat(formatType)
         formatter.timeZone = defTimeZone
-        var date: Date? = null
+        val date: Date?
         date = formatter.parse(strTime)
         return date
     }

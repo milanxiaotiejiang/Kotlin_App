@@ -1,6 +1,5 @@
 package com.kotlin.pay.data.repository
 
-
 import javax.inject.Inject
 
 import com.kotlin.base.data.net.RetrofitFactory
@@ -9,7 +8,6 @@ import com.kotlin.pay.data.protocol.GetPaySignReq
 import com.kotlin.pay.data.protocol.PayOrderReq
 import com.kotlin.pay.data.api.PayApi
 import io.reactivex.Observable
-
 
 /*
    支付数据层

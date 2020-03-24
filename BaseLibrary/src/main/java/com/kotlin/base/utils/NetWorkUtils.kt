@@ -2,7 +2,6 @@ package com.kotlin.base.utils
 
 import android.content.Context
 import android.net.ConnectivityManager
-import android.net.NetworkInfo
 
 /*
     网络工具
@@ -14,8 +13,7 @@ object NetWorkUtils {
      */
     fun isNetWorkAvailable(context: Context): Boolean {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val networkInfo = connectivityManager.activeNetworkInfo
-        return networkInfo != null && networkInfo.isConnected
+        return connectivityManager.isDefaultNetworkActive
     }
 
     /*
@@ -23,16 +21,7 @@ object NetWorkUtils {
      */
     fun isWifiConnected(context: Context): Boolean {
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val networkInfo = cm.activeNetworkInfo
-        return networkInfo != null && networkInfo.type == ConnectivityManager.TYPE_WIFI
+        return !cm.isActiveNetworkMetered
     }
 
-    /*
-        检测3G是否连接
-     */
-    fun is3gConnected(context: Context): Boolean {
-        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val networkInfo = cm.activeNetworkInfo
-        return networkInfo != null && networkInfo.type == ConnectivityManager.TYPE_MOBILE
-    }
 }
