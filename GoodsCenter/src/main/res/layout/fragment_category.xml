@@ -4,6 +4,7 @@
     style="@style/MatchMatch.Vertical.Common">
 
     <com.kotlin.base.widgets.HeaderBar
+        android:id="@+id/mHeaderBar"
         style="@style/MatchWrap"
         app:isShowBack="false"
         app:titleText="商品分类" />
