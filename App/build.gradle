@@ -9,7 +9,7 @@ android {
         minSdkVersion min_sdk_version
         targetSdkVersion target_sdk_version
         versionCode 1
-        versionName "1.0.3"
+        versionName "1.0.4"
         multiDexEnabled true
         flavorDimensions "1"
 

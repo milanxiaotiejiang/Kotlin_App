@@ -21,10 +21,7 @@ class GoodsAdapter(context: Context) : BaseRecyclerViewAdapter<Goods, GoodsAdapt
 
     override fun onCreateViewHolder(parent: ViewGroup,
                                     viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(mContext)
-                .inflate(R.layout.layout_goods_item,
-                        parent,
-                        false)
+        val view = LayoutInflater.from(mContext).inflate(R.layout.layout_goods_item, parent, false)
         return ViewHolder(view)
     }
 
