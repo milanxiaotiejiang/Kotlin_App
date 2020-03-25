@@ -8,8 +8,8 @@ import com.kotlin.base.ext.loadUrl
 import com.kotlin.base.ext.onClick
 import com.kotlin.base.ui.fragment.BaseFragment
 import com.kotlin.base.utils.AppPrefsUtils
-import com.kotlin.base.utils.ext.pop
-import com.kotlin.base.utils.ext.toast
+import com.kotlin.base.ext.pop
+import com.kotlin.base.ext.toast
 import com.kotlin.mall.R
 import com.kotlin.mall.ui.activity.SettingActivity
 import com.kotlin.order.common.OrderConstant

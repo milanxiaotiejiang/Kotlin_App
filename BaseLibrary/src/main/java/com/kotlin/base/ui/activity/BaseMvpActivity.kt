@@ -9,7 +9,7 @@ import com.kotlin.base.injection.module.ActivityModule
 import com.kotlin.base.injection.module.LifecycleProviderModule
 import com.kotlin.base.presenter.BasePresenter
 import com.kotlin.base.presenter.view.BaseView
-import com.kotlin.base.utils.ext.toast
+import com.kotlin.base.ext.toast
 import com.kotlin.base.widgets.ProgressLoading
 import javax.inject.Inject
 

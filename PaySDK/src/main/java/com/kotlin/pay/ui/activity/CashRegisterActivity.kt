@@ -9,9 +9,9 @@ import com.alipay.sdk.app.PayTask
 import com.kotlin.base.ext.onClick
 import com.kotlin.base.ui.activity.BaseMvpActivity
 import com.kotlin.base.utils.YuanFenConverter
-import com.kotlin.base.utils.ext.doAsync
-import com.kotlin.base.utils.ext.toast
-import com.kotlin.base.utils.ext.uiThread
+import com.kotlin.base.ext.doAsync
+import com.kotlin.base.ext.toast
+import com.kotlin.base.ext.uiThread
 import com.kotlin.pay.R
 import com.kotlin.pay.injection.component.DaggerPayComponent
 import com.kotlin.pay.injection.module.PayModule

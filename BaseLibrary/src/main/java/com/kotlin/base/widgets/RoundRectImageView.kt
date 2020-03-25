@@ -4,7 +4,7 @@ import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import com.kotlin.base.R
-import com.kotlin.base.utils.ext.dimen
+import com.kotlin.base.ext.dimen
 
 /*
     圆角图标

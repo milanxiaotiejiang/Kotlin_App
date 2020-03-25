@@ -15,7 +15,7 @@ import com.kotlin.base.ext.startLoading
 import com.kotlin.base.ui.fragment.BaseMvpFragment
 import com.kotlin.base.utils.AppPrefsUtils
 import com.kotlin.base.utils.YuanFenConverter
-import com.kotlin.base.utils.ext.toast
+import com.kotlin.base.ext.toast
 import com.kotlin.goods.R
 import com.kotlin.goods.common.GoodsConstant
 import com.kotlin.goods.data.protocol.CartGoods

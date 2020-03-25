@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
 import com.kotlin.base.common.AppManager
-import com.kotlin.base.utils.ext.find
+import com.kotlin.base.ext.find
 
 /*
     Activity基类，业务无关

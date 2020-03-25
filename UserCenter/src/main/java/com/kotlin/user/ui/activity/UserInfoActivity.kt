@@ -7,7 +7,7 @@ import com.kotlin.base.ext.onClick
 import com.kotlin.base.ui.activity.BaseTakePhotoActivity
 import com.kotlin.base.utils.AppPrefsUtils
 import com.kotlin.base.utils.GlideUtils
-import com.kotlin.base.utils.ext.toast
+import com.kotlin.base.ext.toast
 import com.kotlin.provider.common.ProviderConstant
 import com.kotlin.user.R
 import com.kotlin.user.data.protocol.UserInfo

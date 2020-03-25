@@ -12,7 +12,6 @@ import com.kotlin.base.rx.BaseFunc
 import com.kotlin.base.rx.BaseFuncBoolean
 import com.kotlin.base.rx.BaseSubscriber
 import com.kotlin.base.utils.GlideUtils
-import com.kotlin.base.utils.ext.find
 import com.kotlin.base.widgets.DefaultTextWatcher
 import com.trello.rxlifecycle3.LifecycleProvider
 import io.reactivex.Observable

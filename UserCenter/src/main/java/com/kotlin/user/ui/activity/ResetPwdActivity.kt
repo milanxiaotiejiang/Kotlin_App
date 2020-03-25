@@ -4,10 +4,10 @@ import android.os.Bundle
 import com.kotlin.base.ext.enable
 import com.kotlin.base.ext.onClick
 import com.kotlin.base.ui.activity.BaseMvpActivity
-import com.kotlin.base.utils.ext.clearTop
-import com.kotlin.base.utils.ext.intentFor
-import com.kotlin.base.utils.ext.singleTop
-import com.kotlin.base.utils.ext.toast
+import com.kotlin.base.ext.clearTop
+import com.kotlin.base.ext.intentFor
+import com.kotlin.base.ext.singleTop
+import com.kotlin.base.ext.toast
 import com.kotlin.user.R
 import com.kotlin.user.injection.component.DaggerUserComponent
 import com.kotlin.user.injection.module.UserModule

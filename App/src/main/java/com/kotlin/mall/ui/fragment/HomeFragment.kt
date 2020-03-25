@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kotlin.base.ext.onClick
 import com.kotlin.base.ui.fragment.BaseFragment
-import com.kotlin.base.utils.ext.pop
-import com.kotlin.base.utils.ext.toast
+import com.kotlin.base.ext.pop
+import com.kotlin.base.ext.toast
 import com.kotlin.base.widgets.BannerImageLoader
 import com.kotlin.goods.ui.activity.SearchGoodsActivity
 import com.kotlin.mall.R

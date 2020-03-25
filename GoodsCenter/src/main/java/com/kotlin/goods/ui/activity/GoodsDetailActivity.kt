@@ -8,7 +8,7 @@ import com.google.android.material.tabs.TabLayout
 import com.kotlin.base.ext.onClick
 import com.kotlin.base.ui.activity.BaseActivity
 import com.kotlin.base.utils.AppPrefsUtils
-import com.kotlin.base.utils.ext.pop
+import com.kotlin.base.ext.pop
 import com.kotlin.goods.R
 import com.kotlin.goods.common.GoodsConstant
 import com.kotlin.goods.event.AddCartEvent

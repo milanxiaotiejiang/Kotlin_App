@@ -8,7 +8,7 @@ import com.eightbitlab.rxbus.registerInBus
 import com.kotlin.base.common.AppManager
 import com.kotlin.base.ui.activity.BaseActivity
 import com.kotlin.base.utils.AppPrefsUtils
-import com.kotlin.base.utils.ext.toast
+import com.kotlin.base.ext.toast
 import com.kotlin.goods.common.GoodsConstant
 import com.kotlin.goods.event.UpdateCartSizeEvent
 import com.kotlin.goods.ui.fragment.CartFragment

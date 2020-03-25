@@ -8,8 +8,8 @@ import com.kotlin.base.ext.setVisible
 import com.kotlin.base.ui.activity.BaseActivity
 import com.kotlin.base.ui.adapter.BaseRecyclerViewAdapter
 import com.kotlin.base.utils.AppPrefsUtils
-import com.kotlin.base.utils.ext.pop
-import com.kotlin.base.utils.ext.toast
+import com.kotlin.base.ext.pop
+import com.kotlin.base.ext.toast
 import com.kotlin.goods.R
 import com.kotlin.goods.common.GoodsConstant
 import com.kotlin.goods.ui.adapter.SearchHistoryAdapter

@@ -6,7 +6,7 @@ import android.graphics.drawable.AnimationDrawable
 import android.view.Gravity
 import android.widget.ImageView
 import com.kotlin.base.R
-import com.kotlin.base.utils.ext.find
+import com.kotlin.base.ext.find
 
 /*
     加载对话框封装

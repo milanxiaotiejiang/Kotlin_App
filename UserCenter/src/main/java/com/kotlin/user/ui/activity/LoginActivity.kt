@@ -7,8 +7,8 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.kotlin.base.ext.enable
 import com.kotlin.base.ext.onClick
 import com.kotlin.base.ui.activity.BaseMvpActivity
-import com.kotlin.base.utils.ext.pop
-import com.kotlin.base.utils.ext.toast
+import com.kotlin.base.ext.pop
+import com.kotlin.base.ext.toast
 import com.kotlin.provider.PushProvider
 import com.kotlin.provider.router.RouterPath
 import com.kotlin.user.R

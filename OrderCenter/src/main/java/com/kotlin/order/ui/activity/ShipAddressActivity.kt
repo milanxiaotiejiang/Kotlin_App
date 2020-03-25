@@ -10,8 +10,8 @@ import com.kotlin.base.ext.onClick
 import com.kotlin.base.ext.startLoading
 import com.kotlin.base.ui.activity.BaseMvpActivity
 import com.kotlin.base.ui.adapter.BaseRecyclerViewAdapter
-import com.kotlin.base.utils.ext.pop
-import com.kotlin.base.utils.ext.toast
+import com.kotlin.base.ext.pop
+import com.kotlin.base.ext.toast
 import com.kotlin.order.R
 import com.kotlin.order.common.OrderConstant
 import com.kotlin.order.data.protocol.ShipAddress

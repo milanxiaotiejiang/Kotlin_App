@@ -2,8 +2,8 @@ package com.kotlin.mall.ui.activity
 
 import android.os.Bundle
 import com.kotlin.base.ext.onClick
+import com.kotlin.base.ext.toast
 import com.kotlin.base.ui.activity.BaseActivity
-import com.kotlin.base.utils.ext.toast
 import com.kotlin.mall.R
 import com.kotlin.user.utils.UserPrefsUtils
 import kotlinx.android.synthetic.main.activity_setting.*
